@@ -16,7 +16,7 @@ async fn offline_metadata_commands_have_exact_output_no_config_writes_and_write_
         cli::execute(["better-fonts", "skill"], &environment, &mut output)
             .await
             .unwrap();
-        assert_eq!(output, cli::SKILL.as_bytes());
+        assert_eq!(output, INSTALL_TEXT.as_bytes());
         assert!(!environment.config.exists());
         output.clear();
         cli::execute(["better-fonts", "--version"], &environment, &mut output)
@@ -258,3 +258,5 @@ fn parsing_rejects_invalid_driver_and_conflicting_flags_before_any_side_effect()
     let leaf = matches.subcommand().unwrap().1.subcommand().unwrap().1;
     assert_eq!(leaf.get_one::<bool>("restart"), Some(&false));
 }
+
+const INSTALL_TEXT: &str = "Install the better-fonts skill using the Skills CLI:\n\n  npx skills add alexgorbatchev/better-fonts-cli --skill better-fonts\n\nSkill:\n\n  https://github.com/alexgorbatchev/better-fonts-cli/tree/main/skills/better-fonts\n";

@@ -10,7 +10,7 @@ use std::{collections::BTreeMap, ffi::OsString, io::Write, path::PathBuf};
 use tokio_util::sync::CancellationToken;
 mod apps;
 mod command;
-pub use command::{SKILL, command, help_options};
+pub use command::{command, help_options};
 pub struct Environment {
     pub mode: Mode,
     pub home: Option<PathBuf>,
@@ -90,7 +90,7 @@ where
         writeln!(output, "{}", env!("CARGO_PKG_VERSION"))?;
         return Ok(());
     }
-    if cli_command_kit::write_skill(&matches, &help_options(), output)? {
+    if cli_command_kit::write_skill(&command, &matches, &help_options(), output)? {
         return Ok(());
     }
     let path = matches

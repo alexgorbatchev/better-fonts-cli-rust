@@ -2,10 +2,12 @@ use crate::app::Driver;
 use clap::{Arg, ArgAction, Command};
 use cli_command_kit::{HelpOptions, Mode, TreeOptions};
 use std::path::PathBuf;
-pub const SKILL: &str = "Install the better-fonts skill using the Skills CLI:\n\n  npx skills add alexgorbatchev/better-fonts-cli --skill better-fonts\n\nSkill:\n\n  https://github.com/alexgorbatchev/better-fonts-cli/tree/main/skills/better-fonts\n";
 pub fn help_options() -> HelpOptions {
     HelpOptions {
-        skill: Some(SKILL.into()),
+        skill: Some(
+            cli_command_kit::SkillSource::new("alexgorbatchev/better-fonts-cli", "main")
+                .expect("the fixed skill source names a GitHub repository"),
+        ),
         tree: TreeOptions {
             hide_generated_commands: true,
             ..Default::default()

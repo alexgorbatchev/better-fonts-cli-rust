@@ -6,8 +6,8 @@ fn operational_documents_cover_the_native_command_tree_and_printed_skill_locatio
     let folder = root.join("skills/better-fonts");
     let skill = std::fs::read_to_string(folder.join("SKILL.md")).unwrap();
     assert!(skill.contains("name: better-fonts\n"));
-    assert!(cli::SKILL.contains("--skill better-fonts\n"));
-    assert!(cli::SKILL.contains("/skills/better-fonts\n"));
+    assert!(INSTALL_TEXT.contains("--skill better-fonts\n"));
+    assert!(INSTALL_TEXT.contains("/skills/better-fonts\n"));
     let mut text = skill;
     for file in [
         "commands.md",
@@ -35,3 +35,5 @@ fn operational_documents_cover_the_native_command_tree_and_printed_skill_locatio
         }
     }
 }
+
+const INSTALL_TEXT: &str = "Install the better-fonts skill using the Skills CLI:\n\n  npx skills add alexgorbatchev/better-fonts-cli --skill better-fonts\n\nSkill:\n\n  https://github.com/alexgorbatchev/better-fonts-cli/tree/main/skills/better-fonts\n";
